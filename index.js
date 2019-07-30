@@ -104,6 +104,56 @@ app.post('/user/login', (req, res) => {
     })
 })
 
+// Issue Routes
+const IssueModel = require('./models/issue.model');
+
+app.post('/issue', (req, res) => {
+    IssueModel.create(req.body, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.json(result);
+    })
+})
+
+// Issue Delete
+app.delete('/issue/:id', (req, res) => {
+    IssueModel.deleteOne({_id: req.params.id}, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.json(result);
+    })
+})
+app.get('/issue/', (req, res) => {
+    IssueModel.find({}, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.json(result);
+    })
+})
+app.put('/issue/:id', (req, res) => {
+    let obj = {};
+    if (req.body.resolved) {
+        obj.resolved = req.body.resolved
+        obj.resolved_at = Date.now();
+    }
+    if (req.body.title) {
+        obj.title = req.body.title;
+    }
+    IssueModel.updateOne({_id: req.params.id}, obj, (err, result) => {
+        if(err){
+            console.log(err);
+            return;
+        }
+        res.json(result);
+    })
+})
+
 app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/test', (req, res) => res.json({
     message: "Cohuni o njerz"
