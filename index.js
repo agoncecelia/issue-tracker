@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 const mongoose = require('mongoose')
 const morgan = require('morgan');
+const path = require('path')
 
 const DB_LOCAL = 'mongodb://localhost:27017/issue-tracker'
 app.use(express.json())
@@ -154,10 +155,10 @@ app.put('/issue/:id', (req, res) => {
     })
 })
 
-app.get('/', (req, res) => res.send('Hello World!'))
-app.get('/test', (req, res) => res.json({
-    message: "Cohuni o njerz"
-}))
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/index.html'));
+})
+
 
 // Start the server
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
