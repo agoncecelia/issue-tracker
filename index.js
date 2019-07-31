@@ -155,10 +155,11 @@ app.put('/issue/:id', (req, res) => {
     })
 })
 
+app.use(express.static(path.join(__dirname, 'client')));
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/index.html'));
 })
-
 
 // Start the server
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
