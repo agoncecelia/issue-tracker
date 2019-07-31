@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const mongoose = require('mongoose')
 const morgan = require('morgan');
-const path = require('path')
+const path = require('path');
 
 const DB_LOCAL = 'mongodb://localhost:27017/issue-tracker'
 app.use(express.json())
